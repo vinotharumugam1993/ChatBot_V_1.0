@@ -1,2 +1,2 @@
-python chatbot_trainer.py -d D:\Dataset\Chatterbot_corpus\chatterbot-corpus-master\chatterbot_corpus\data\english/ -m output\bot_model.pkl 
+python chatbot_trainer.py -d D:\Dataset\Chatterbot_corpus\chatterbot-corpus-master\chatterbot_corpus\data\english/ -m output\bot_model.pkl
 python chatbot_predict.py -m output\bot_model.pkl -a D:\ML code\AI_ChatBot\output\audio_file
