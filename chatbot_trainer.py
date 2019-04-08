@@ -14,32 +14,35 @@ try:
 except ImportError as e:
     print(e)
     print("Check wether the package {} is properly installed...".format(e))
-    
+
+
 class Chatbot_Trainer():
-    
+
     def __init__(self):
-        
         # construct the argument parser and parse the arguments
         self.ap = argparse.ArgumentParser()
         self.ap.add_argument("-d", "--dataset", required=True,
-        	help="path to input dataset")
+                             help="path to input dataset")
         self.ap.add_argument("-m", "--model", required=True,
-        	help="path to output trained model")
+                             help="path to output trained model")
         self.args = vars(self.ap.parse_args())
         self.cb_obj = ChatBot('Bot')
-    
+
     def train_model(self):
+        trained_data = []
         self.cb_obj.set_trainer(ListTrainer)
         for files in os.listdir(self.args['dataset']):
-            data = open(self.args['dataset']+files,'r').readlines()
-            self.cb_obj.train(data)
-            
-    def save_model(self):
-        pickle.dump(self.cb_obj, open(self.args['model'], 'wb'))
+            data = open(self.args['dataset'] + files, 'r').readlines()
+            trained_data.append(self.cb_obj.train(data))
+        return trained_data
+
+    def save_model(self, trained_data):
+        pickle.dump(trained_data, open(self.args['model'], 'wb'))
+
 
 if __name__ == "__main__":
     cb_training_obj = Chatbot_Trainer()
-    cb_training_obj.train_model()
-    cb_training_obj.save_model()
-    
+    trained_data = cb_training_obj.train_model()
+    cb_training_obj.save_model(trained_data)
+
 
