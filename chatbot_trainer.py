@@ -23,7 +23,7 @@ class Chatbot_Trainer():
         self.ap = argparse.ArgumentParser()
         self.ap.add_argument("-d", "--dataset", required=True,
                              help="path to input dataset")
-        self.ap.add_argument("-m", "--model", required=True,
+        self.ap.add_argument("-m", "--model", required=False,
                              help="path to output trained model")
         self.args = vars(self.ap.parse_args())
         self.cb_obj = ChatBot('Bot')
