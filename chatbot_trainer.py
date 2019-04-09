@@ -8,9 +8,13 @@ Created on Tue Apr  9 00:15:13 2019
 try:
     import argparse
     from chatterbot.trainers import ListTrainer
+    from chatterbot.trainers import ChatterBotCorpusTrainer
     from chatterbot import ChatBot
     import os
     import pickle
+    from gtts import gTTS
+    import speech_recognition as sr
+    from pygame import mixer
 except ImportError as e:
     print(e)
     print("Check wether the package {} is properly installed...".format(e))
@@ -30,10 +34,11 @@ class Chatbot_Trainer():
 
     def train_model(self):
         trained_data = []
-        self.cb_obj.set_trainer(ListTrainer)
+        trainer = ChatterBotCorpusTrainer(self.cb_obj)
         for files in os.listdir(self.args['dataset']):
             data = open(self.args['dataset'] + files, 'r').readlines()
-            trained_data.append(self.cb_obj.train(data))
+            trainer.train(data)
+            print("IN")
         return trained_data
 
     def save_model(self, trained_data):
