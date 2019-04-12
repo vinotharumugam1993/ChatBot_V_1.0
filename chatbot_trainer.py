@@ -36,18 +36,19 @@ class Chatbot_Trainer():
         trained_data = []
         trainer = ChatterBotCorpusTrainer(self.cb_obj)
         for files in os.listdir(self.args['dataset']):
-            data = open(self.args['dataset'] + files, 'r').readlines()
-            trainer.train(data)
-            print("IN")
+            trained_data.append(trainer.train(self.args['dataset'] + files))
         return trained_data
 
     def save_model(self, trained_data):
-        pickle.dump(trained_data, open(self.args['model'], 'wb'))
-
+        with open(self.args['model'], 'wb') as f:
+            pickle.dump(trained_data, f)
+        print("Model Saved as :{}".format(self.args['model']))
 
 if __name__ == "__main__":
     cb_training_obj = Chatbot_Trainer()
     trained_data = cb_training_obj.train_model()
     cb_training_obj.save_model(trained_data)
+
+
 
 
