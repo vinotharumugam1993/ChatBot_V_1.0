@@ -47,7 +47,7 @@ class Chatbot_Trainer():
 if __name__ == "__main__":
     cb_training_obj = Chatbot_Trainer()
     trained_data = cb_training_obj.train_model()
-    cb_training_obj.save_model(trained_data)
+    # cb_training_obj.save_model(trained_data)
 
 
 

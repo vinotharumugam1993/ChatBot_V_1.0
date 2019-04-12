@@ -4,20 +4,13 @@ Created on Tue Apr  9 01:32:41 2019
 
 @author: Lenovo
 """
+import argparse
+import datetime
+import pickle
 
-try:
-    import argparse
-    import os
-    from gtts import gTTS
-    import speech_recognition as sr
-    from pygame import mixer
-    import pyaudio
-    import time
-    import pickle
-    import datetime
-except ImportError as e:
-    print(e)
-    print("Check wether the package {} is properly installed...".format(e))
+import speech_recognition as sr
+from gtts import gTTS
+from pygame import mixer
 
 
 class Chatbot_Predict():
